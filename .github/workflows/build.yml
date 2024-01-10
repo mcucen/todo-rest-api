@@ -12,7 +12,7 @@ permissions:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: mcucen/laravel-sail-8.3:latest
 
     steps:
     - uses: actions/checkout@v3
