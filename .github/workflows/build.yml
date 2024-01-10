@@ -69,12 +69,12 @@ jobs:
 
   stan:
     needs: build
-    uses: ./.github/workflows/build/greetings.yml
+    uses: ./.github/workflows/greetings.yml
 
   clean-up:
     needs: ["test", "stan"]
-    uses: ./.github/workflows/build/greetings.yml
+    uses: ./.github/workflows/greetings.yml
 
   deploy:
     needs: clean-up
-    uses: ./.github/workflows/build/greetings.yml
+    uses: ./.github/workflows/greetings.yml
