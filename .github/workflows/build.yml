@@ -1,4 +1,4 @@
-name: Build
+name: Build & Deploy
 
 on:
   push:
@@ -66,3 +66,30 @@ jobs:
 
       - name: Run Tests
         run: php artisan test
+
+  stan:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+      - name: Greetings!
+        run: echo "Hello World! This is Stan Job"
+
+  clean-up:
+    runs-on: ubuntu-latest
+
+    needs: ["test", "stan"]
+
+    steps:
+      - name: Greetings!
+        run: echo "Hello World! This is Clean-up Job"
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: clean-up
+
+    steps:
+      - name: Greetings!
+        run: echo "Hello World! This is Stan Job"
