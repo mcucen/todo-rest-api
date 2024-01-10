@@ -1,9 +1,0 @@
-name: Greetings!
-
-jobs:
-  greeting:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Hello World
-        run: echo "Hello World!"
