@@ -68,28 +68,13 @@ jobs:
         run: php artisan test
 
   stan:
-    runs-on: ubuntu-latest
-
     needs: build
-
-    steps:
-      - name: Greetings!
-        run: echo "Hello World! This is Stan Job"
+    uses: ./.github/workflows/build/greetings.yml
 
   clean-up:
-    runs-on: ubuntu-latest
-
     needs: ["test", "stan"]
-
-    steps:
-      - name: Greetings!
-        run: echo "Hello World! This is Clean-up Job"
+    uses: ./.github/workflows/build/greetings.yml
 
   deploy:
-    runs-on: ubuntu-latest
-
     needs: clean-up
-
-    steps:
-      - name: Greetings!
-        run: echo "Hello World! This is Stan Job"
+    uses: ./.github/workflows/build/greetings.yml
