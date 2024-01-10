@@ -1,3 +1,5 @@
+name: Pest
+
 on:
   push:
     branches:
