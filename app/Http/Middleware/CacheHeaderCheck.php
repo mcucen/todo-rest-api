@@ -18,6 +18,6 @@ class CacheHeaderCheck
         if ($request->hasHeader('X-Cdn-Header') && $request->header('X-Cdn-Header') === config('app.cdn_header_key')) {
             return $next($request);
         }
-        return $next($request);
+        throw new \Exception('Unauthorized');
     }
 }
