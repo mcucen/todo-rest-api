@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -23,8 +25,43 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->reportable(function (Request $request, Throwable $e) {
+            return $this->render($request, $e);
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param Request $request
+     * @param Exception|Throwable $e
+     * @return ResponseAlias
+     */
+    public function render($request, Exception|Throwable $e)
+    {
+        switch (true) {
+            case $e instanceof \Illuminate\Auth\AuthenticationException:
+            case $e instanceof UnauthorizedHttpException:
+                return response()->json([
+                    'message' => 'Unauthenticated'
+                ], 401);
+            case $e instanceof \Illuminate\Validation\ValidationException:
+                return response()->json([
+                    'message' => 'Validation error',
+                    'errors' => $e->errors()
+                ], 422);
+            case $e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException:
+                return response()->json([
+                    'message' => 'Not found'
+                ], 404);
+            case $e instanceof \Illuminate\Database\QueryException:
+                return response()->json([
+                    'message' => 'Query error'
+                ], 500);
+            default:
+                return response()->json([
+                    'message' => 'Server error'
+                ], 500);
+        }
     }
 }
