@@ -172,15 +172,15 @@ jobs:
       - name: Remove Dev Dependencies
         run: composer install --no-interaction --prefer-dist --no-dev
 
-#  deploy:
-#    runs-on: ubuntu-latest
-#
-#    needs: clean-up
-#
-#    steps:
-#      - name: Checkout Repository
-#        uses: actions/checkout@v2
-#
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: clean-up
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
 #      - uses: webfactory/ssh-agent@v0.8.0
 #        with:
 #          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
