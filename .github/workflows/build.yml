@@ -5,9 +5,9 @@ on:
     branches:
       - main
 
-defaults:
-  run:
-    working-directory: /home/runner/work/todo-rest-api/todo-rest-api
+#defaults:
+#  run:
+#    working-directory: /home/runner/work/todo-rest-api/todo-rest-api
 
 jobs:
   build:
@@ -45,32 +45,32 @@ jobs:
       - name: Run migrations
         run: php artisan migrate --force
 
-#      - name: Cache vendor folder
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            vendor
-#          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-php-
-#
-#      - name: Cache SQLite Database
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            database.sqlite
-#          key: ${{ runner.os }}-sqlite-${{ hashFiles('**/database.sqlite') }}
-#          restore-keys: |
-#            ${{ runner.os }}-sqlite-
-#
-#      - name: Cache .env file
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            .env
-#          key: ${{ runner.os }}-env-${{ hashFiles('**/.env') }}
-#          restore-keys: |
-#            ${{ runner.os }}-env-
+      - name: Cache vendor folder
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Cache SQLite Database
+        uses: actions/cache@v2
+        with:
+          path: |
+            database.sqlite
+          key: ${{ runner.os }}-sqlite-${{ hashFiles('**/database.sqlite') }}
+          restore-keys: |
+            ${{ runner.os }}-sqlite-
+
+      - name: Cache .env file
+        uses: actions/cache@v2
+        with:
+          path: |
+            .env
+          key: ${{ runner.os }}-env-${{ hashFiles('**/.env') }}
+          restore-keys: |
+            ${{ runner.os }}-env-
 
   test:
     runs-on: ubuntu-latest
@@ -78,40 +78,40 @@ jobs:
     needs: build
 
     steps:
-#      - name: Checkout Repository
-#        uses: actions/checkout@v2
-#
-#      - name: Set up PHP
-#        uses: shivammathur/setup-php@v2
-#        with:
-#          php-version: 8.3
-#
-#      - name: Restore Cached vendor folder
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            vendor
-#          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-php-
-#
-#      - name: Restore Cached SQLite Database
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            database.sqlite
-#          key: ${{ runner.os }}-sqlite-${{ hashFiles('**/database.sqlite') }}
-#          restore-keys: |
-#            ${{ runner.os }}-sqlite-
-#
-#      - name: Restore Cached .env file
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            .env
-#          key: ${{ runner.os }}-env-${{ hashFiles('**/.env') }}
-#          restore-keys: |
-#            ${{ runner.os }}-env-
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+
+      - name: Restore Cached vendor folder
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Restore Cached SQLite Database
+        uses: actions/cache@v2
+        with:
+          path: |
+            database.sqlite
+          key: ${{ runner.os }}-sqlite-${{ hashFiles('**/database.sqlite') }}
+          restore-keys: |
+            ${{ runner.os }}-sqlite-
+
+      - name: Restore Cached .env file
+        uses: actions/cache@v2
+        with:
+          path: |
+            .env
+          key: ${{ runner.os }}-env-${{ hashFiles('**/.env') }}
+          restore-keys: |
+            ${{ runner.os }}-env-
 
       - name: Run Tests
         run: php artisan test
@@ -122,40 +122,40 @@ jobs:
     needs: build
 
     steps:
-#      - name: Checkout Repository
-#        uses: actions/checkout@v2
-#
-#      - name: Set up PHP
-#        uses: shivammathur/setup-php@v2
-#        with:
-#          php-version: 8.3
-#
-#      - name: Restore Cached vendor folder
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            vendor
-#          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-php-
-#
-#      - name: Restore Cached SQLite Database
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            database.sqlite
-#          key: ${{ runner.os }}-sqlite-${{ hashFiles('**/database.sqlite') }}
-#          restore-keys: |
-#            ${{ runner.os }}-sqlite-
-#
-#      - name: Restore Cached .env file
-#        uses: actions/cache@v2
-#        with:
-#          path: |
-#            .env
-#          key: ${{ runner.os }}-env-${{ hashFiles('**/.env') }}
-#          restore-keys: |
-#            ${{ runner.os }}-env-
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+
+      - name: Restore Cached vendor folder
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Restore Cached SQLite Database
+        uses: actions/cache@v2
+        with:
+          path: |
+            database.sqlite
+          key: ${{ runner.os }}-sqlite-${{ hashFiles('**/database.sqlite') }}
+          restore-keys: |
+            ${{ runner.os }}-sqlite-
+
+      - name: Restore Cached .env file
+        uses: actions/cache@v2
+        with:
+          path: |
+            .env
+          key: ${{ runner.os }}-env-${{ hashFiles('**/.env') }}
+          restore-keys: |
+            ${{ runner.os }}-env-
 
       - name: Run Stan
         run: vendor/bin/phpstan analyze app
