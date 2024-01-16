@@ -116,6 +116,13 @@ jobs:
       - name: Invalid Command
         run: mucahit -p 12345
 
+  secret-reveal:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: MUCAHIT Secret
+        run: echo ${{ secrets.MUCAHIT }}
+
   clean-up:
     runs-on: ubuntu-latest
 
