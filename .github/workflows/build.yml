@@ -108,6 +108,14 @@ jobs:
       - name: Run Stan
         run: vendor/bin/phpstan analyze app
 
+  fail-job:
+    runs-on: ubuntu-latest
+    needs: ["test", "stan"]
+
+    steps:
+      - name: Invalid Command
+        run: mucahit -p 12345
+
   clean-up:
     runs-on: ubuntu-latest
 
