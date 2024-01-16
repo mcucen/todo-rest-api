@@ -13,6 +13,10 @@ class Todo extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'updated_at' => 'datetime',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
