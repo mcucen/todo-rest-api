@@ -165,5 +165,11 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
+      - name: Create .ssh directory
+        run: mkdir -p ~/.ssh
+
+      - name: Known Host
+        run: ssh-keyscan 185.241.63.153 >> ~/.ssh/known_hosts
+
       - name: Run deploy
         run: php vendor/bin/envoy run deploy
