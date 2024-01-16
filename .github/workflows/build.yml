@@ -54,24 +54,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: Cache SQLite Database
-        uses: actions/cache@v2
-        with:
-          path: |
-            database/database.sqlite
-          key: ${{ runner.os }}-sqlite-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-sqlite-
-
-      - name: Cache .env file
-        uses: actions/cache@v2
-        with:
-          path: |
-            .env
-          key: ${{ runner.os }}-env-${{ hashFiles('**/.env.example') }}
-          restore-keys: |
-            ${{ runner.os }}-env-
-
   test:
     runs-on: ubuntu-latest
 
@@ -95,25 +77,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: Restore Cached SQLite Database
-        uses: actions/cache@v2
-        with:
-          path: |
-            database.sqlite
-          key: ${{ runner.os }}-sqlite-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-sqlite-
+      - name: Copy Environment File
+        run: cp .env.example .env
 
-      - name: Restore Cached .env file
-        uses: actions/cache@v2
-        with:
-          path: |
-            .env
-          key: ${{ runner.os }}-env-${{ hashFiles('**/.env.example') }}
-          restore-keys: |
-            ${{ runner.os }}-env-
-
-      - name: Key Generate
+      - name: Generate Application Key
         run: php artisan key:generate
 
       - name: Run Tests
@@ -142,24 +109,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: Restore Cached SQLite Database
-        uses: actions/cache@v2
-        with:
-          path: |
-            database.sqlite
-          key: ${{ runner.os }}-sqlite-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-sqlite-
-
-      - name: Restore Cached .env file
-        uses: actions/cache@v2
-        with:
-          path: |
-            .env
-          key: ${{ runner.os }}-env-${{ hashFiles('**/.env.example') }}
-          restore-keys: |
-            ${{ runner.os }}-env-
-
       - name: Run Stan
         run: vendor/bin/phpstan analyze app
 
@@ -169,6 +118,23 @@ jobs:
     needs: ["test", "stan"]
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+
+      - name: Restore Cached vendor folder
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
       - name: Remove Dev Dependencies
         run: composer install --no-interaction --prefer-dist --no-dev
 
@@ -181,6 +147,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-#      - uses: webfactory/ssh-agent@v0.8.0
-#        with:
-#          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
