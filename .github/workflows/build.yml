@@ -7,7 +7,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./mcucen/todo-rest-api
+    working-directory: /home/runner/work/todo-rest-api/todo-rest-api
 
 jobs:
   build:
