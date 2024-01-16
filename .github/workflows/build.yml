@@ -58,8 +58,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            database.sqlite
-          key: ${{ runner.os }}-sqlite-${{ hashFiles('**/database.sqlite') }}
+            database/database.sqlite
+          key: ${{ runner.os }}-sqlite-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-sqlite-
 
@@ -68,7 +68,7 @@ jobs:
         with:
           path: |
             .env
-          key: ${{ runner.os }}-env-${{ hashFiles('**/.env') }}
+          key: ${{ runner.os }}-env-${{ hashFiles('**/.env.example') }}
           restore-keys: |
             ${{ runner.os }}-env-
 
@@ -100,7 +100,7 @@ jobs:
         with:
           path: |
             database.sqlite
-          key: ${{ runner.os }}-sqlite-${{ hashFiles('**/database.sqlite') }}
+          key: ${{ runner.os }}-sqlite-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-sqlite-
 
@@ -109,7 +109,7 @@ jobs:
         with:
           path: |
             .env
-          key: ${{ runner.os }}-env-${{ hashFiles('**/.env') }}
+          key: ${{ runner.os }}-env-${{ hashFiles('**/.env.example') }}
           restore-keys: |
             ${{ runner.os }}-env-
 
@@ -144,7 +144,7 @@ jobs:
         with:
           path: |
             database.sqlite
-          key: ${{ runner.os }}-sqlite-${{ hashFiles('**/database.sqlite') }}
+          key: ${{ runner.os }}-sqlite-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-sqlite-
 
@@ -153,7 +153,7 @@ jobs:
         with:
           path: |
             .env
-          key: ${{ runner.os }}-env-${{ hashFiles('**/.env') }}
+          key: ${{ runner.os }}-env-${{ hashFiles('**/.env.example') }}
           restore-keys: |
             ${{ runner.os }}-env-
 
