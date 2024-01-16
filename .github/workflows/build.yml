@@ -113,6 +113,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-env-
 
+      - name: Key Generate
+        run: php artisan key:generate
+
       - name: Run Tests
         run: php artisan test
 
