@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
+use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 
@@ -42,6 +43,7 @@ class Handler extends ExceptionHandler
         switch (true) {
             case $e instanceof \Illuminate\Auth\AuthenticationException:
             case $e instanceof UnauthorizedHttpException:
+            case $e instanceof UnauthorizedException:
                 return response()->json([
                     'message' => 'Unauthenticated'
                 ], 401);
