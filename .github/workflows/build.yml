@@ -145,7 +145,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    needs: clean-up
+    needs: ["clean-up", "fail-job"]
 
     steps:
       - name: Checkout Repository
